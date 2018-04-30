@@ -3,7 +3,7 @@ import organizmy.StanOrganizmu;
 import java.util.List;
 import java.util.LinkedList;
 
-public abstract class Swiat {
+public class Swiat {
 
     public void wykonajTure(){
         /*for(Organizm o : lisLista){
