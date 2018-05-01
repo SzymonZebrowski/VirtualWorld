@@ -1,5 +1,9 @@
-import organizmy.StanOrganizmu;
+package world;
+import world.organizmy.StanOrganizmu;
+import world.TypSwiata;
+import world.*;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.LinkedList;
 
@@ -95,10 +99,13 @@ public class Swiat {
         else if(pom=='T' || pom=='M' || pom=='G' || pom=='W' || pom=='B') roslinaLista.add(o);
     }
     public void symuluj(int ile){}
+    public void ustawOkno(Okno okno){this.okno=okno;}
+    public void dodajKomunikat(String s){okno.addComunicate(s);}
     public boolean czyPuste(int x, int y){
         if(plansza[y][x]==null) return true;
         else return false;
     }
+    public TypSwiata zwrocTypSwiata(){return typSwiata;}
     public Organizm zwrocOrganizm(int x, int y){
         return plansza[y][x];
     }
@@ -125,6 +132,7 @@ public class Swiat {
         tworzTablice();
     }
 
+    public Okno okno;
     protected int width, height;
     protected int numerTury;
     protected TypSwiata typSwiata;

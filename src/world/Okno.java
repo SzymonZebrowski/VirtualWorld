@@ -1,3 +1,5 @@
+package world;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -59,6 +61,7 @@ class Okno implements ActionListener {
         jl.setVisibleRowCount(5);
        // f.setResizable(false);
     }
+
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource()==bZapisz) System.out.println("Zapisz!");
         else if(ae.getSource()==bWczytaj) System.out.println("Wczytaj!");

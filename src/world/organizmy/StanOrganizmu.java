@@ -1,4 +1,4 @@
-package organizmy;
+package world.organizmy;
 
 public enum StanOrganizmu {
     BORN,
