@@ -116,7 +116,7 @@ public class Swiat {
     public void symuluj(){
         czyscTablice();
         tworzTablice();
-        
+
     }
     public void ustawOkno(Okno okno){this.okno=okno;}
     public void dodajKomunikat(String s){okno.addComunicate(s);}
