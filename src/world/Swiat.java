@@ -1,6 +1,6 @@
 package world;
 import world.organizmy.StanOrganizmu;
-import world.TypSwiata;
+import world.organizmy.* ;
 import world.*;
 
 import javax.swing.*;
@@ -45,6 +45,16 @@ public class Swiat {
             }
             else if(o.zwrocStan()==StanOrganizmu.BORN) o.dorosnij();
         }*/
+        numerTury++;
+            for(Organizm o : doDodaniaLista){
+               dodajOrganizm(o);
+            }
+        doDodaniaLista.removeAll(doDodaniaLista);
+        okno.deleteComunicate();
+
+        czyscTablice();
+        tworzTablice();
+
         List<Organizm>lista=null;
         for(int i=0; i<5; i++){
             switch(i){
@@ -62,6 +72,7 @@ public class Swiat {
                 else if(o.zwrocStan()==StanOrganizmu.BORN) o.dorosnij();
             }
         }
+        System.out.println(licznik);
     }
     public void czyscTablice(){
         for(int i=0; i<height; i++){
@@ -90,6 +101,10 @@ public class Swiat {
     }
     public int zwrocWysokosc(){return height;}
     public int zwrocSzerokosc(){return width;}
+    public void doDodania(Organizm o){
+        doDodaniaLista.add(o);
+        licznik++;
+    }
     public void dodajOrganizm(Organizm o){
         char pom = o.zwrocZnak();
         if(pom=='l') lisLista.add(o);
@@ -98,7 +113,11 @@ public class Swiat {
         else if(pom=='z') zolwLista.add(o);
         else if(pom=='T' || pom=='M' || pom=='G' || pom=='W' || pom=='B') roslinaLista.add(o);
     }
-    public void symuluj(int ile){}
+    public void symuluj(){
+        czyscTablice();
+        tworzTablice();
+        
+    }
     public void ustawOkno(Okno okno){this.okno=okno;}
     public void dodajKomunikat(String s){okno.addComunicate(s);}
     public boolean czyPuste(int x, int y){
@@ -121,22 +140,23 @@ public class Swiat {
         this.height=h;
         this.typSwiata=typ;
         this.numerTury=0;
+
         plansza=new Organizm[height][width];
         lisLista=new LinkedList<Organizm>();
         wilkLista=new LinkedList<Organizm>();
         czlowiekOwcaAntylopaLista=new LinkedList<Organizm>();
         zolwLista=new LinkedList<Organizm>();
         roslinaLista=new LinkedList<Organizm>();
-
-        czyscTablice();
-        tworzTablice();
+        doDodaniaLista=new LinkedList<Organizm>();
     }
 
     public Okno okno;
     protected int width, height;
     protected int numerTury;
+    protected int licznik=0;
     protected TypSwiata typSwiata;
     protected Organizm[][] plansza;
+    protected List<Organizm> doDodaniaLista;
     protected List<Organizm> lisLista;
     protected List<Organizm> wilkLista;
     protected List<Organizm> czlowiekOwcaAntylopaLista;

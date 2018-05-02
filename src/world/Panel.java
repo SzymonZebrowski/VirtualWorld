@@ -31,12 +31,13 @@ public class Panel extends JPanel {
                         else g2d.drawRect(20 + j * 20, 50 + i * 20, 20, 20);
                     }
                 } else {
-                    if ((i + j) % 2 == 0) {
-                        // g2d.setPaint(new Color(0,70,160));
+                    if (swiat.zwrocOrganizm(j,i)!=null) {
+                         g2d.setPaint(new Color(57, 85, 135));
                         // g2d.fillRect(10 + j * 20, 50 + i * 20, 20, 20);
-                        g2d.drawRect(10 + j * 20, 50 + i * 20, 20, 20);
+                        g2d.fillRect(10 + j * 20, 50 + i * 20, 20, 20);
                     } else {
                         //g2d.setPaint(new Color(150,150,150));
+                        g2d.setPaint(new Color(0,0,0));
                         g2d.drawRect(10 + j * 20, 50 + i * 20, 20, 20);
                     }
                 }

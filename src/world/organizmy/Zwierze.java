@@ -19,6 +19,7 @@ public abstract class Zwierze extends Organizm {
             }while(!mozeIsc(dx,dy));
 
             swiat.dodajKomunikat(nazwa+" rusza się z ("+x+","+y+") na ("+(x+dx)+","+(y+dy)+")");
+            System.out.println(nazwa+" rusza się z ("+x+","+y+") na ("+(x+dx)+","+(y+dy)+")");
             idz(x+dx, y+dy);
 
         }
