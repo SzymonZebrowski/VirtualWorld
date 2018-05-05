@@ -11,6 +11,8 @@ public abstract class Zwierze extends Organizm {
             int dx=0,  dy=0;
             Random rand = new Random();
             do{
+                dx=0;
+                dy=0;
                 int pom=rand.nextInt(4);
                 if(pom==0) dx=1;
                 else if(pom==1) dx=-1;
@@ -64,25 +66,32 @@ public abstract class Zwierze extends Organizm {
     }
     public void kolizja(Organizm atakujacy, Organizm obronca){
         swiat.dodajKomunikat("Kolizja na ("+obronca.zwrocX()+","+obronca.zwrocY()+")");
+        System.out.println("Kolizja na ("+obronca.zwrocX()+","+obronca.zwrocY()+")");
         if(obronca.zwrocZnak()==atakujacy.zwrocZnak())
             rozmnoz(atakujacy,obronca);
         else walcz(atakujacy,obronca);
     }
     public void walcz(Organizm atakujacy, Organizm obronca){
         swiat.dodajKomunikat(nazwa+" atakuje "+obronca.zwrocNazwe()+" na ("+(obronca.zwrocX())+","+(obronca.zwrocY())+")");
+        System.out.println(nazwa+" atakuje "+obronca.zwrocNazwe()+" na ("+(obronca.zwrocX())+","+(obronca.zwrocY())+")");
 
-        if(obronca.zwrocSile()<=atakujacy.zwrocSile()){
-            swiat.dodajKomunikat("Atakujacy wygrywa!");
-            int dx=obronca.zwrocX();
-            int dy=obronca.zwrocY();
-            obronca.ustawStan(StanOrganizmu.DEAD);
-            swiat.zwolnijPole(dx,dy);
-            idz(dx,dy);
-        }
-        else{
-            swiat.dodajKomunikat("Atakujacy przegrywa!");
-            atakujacy.ustawStan(StanOrganizmu.DEAD);
-            swiat.zwolnijPole(atakujacy.zwrocX(), atakujacy.zwrocY());
+        if(obronca.umiejetnosc(atakujacy, obronca)==false) {
+            if (obronca.zwrocSile() <= atakujacy.zwrocSile()) {
+                swiat.dodajKomunikat("Atakujacy wygrywa!");
+                System.out.println("Atakujacy wygrywa!");
+                int dx = obronca.zwrocX();
+                int dy = obronca.zwrocY();
+                obronca.ustawStan(StanOrganizmu.DEAD);
+                swiat.zwolnijPole(dx, dy);
+                idz(dx, dy);
+                swiat.zmniejszLicznik();
+            } else {
+                swiat.dodajKomunikat("Atakujacy przegrywa!");
+                System.out.println("Atakujacy przegrywa!");
+                atakujacy.ustawStan(StanOrganizmu.DEAD);
+                swiat.zwolnijPole(atakujacy.zwrocX(), atakujacy.zwrocY());
+                swiat.zmniejszLicznik();
+            }
         }
     }
     public void rozmnoz(Organizm atakujacy, Organizm obronca){
