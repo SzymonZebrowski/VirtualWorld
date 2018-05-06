@@ -8,7 +8,7 @@ public class Owca extends Zwierze {
         inicjatywa=4;
         znak='o';
         wiek=0;
-        stan=StanOrganizmu.ALIVE;
+        stan=StanOrganizmu.BORN;
         nazwa="Owca";
     }
 

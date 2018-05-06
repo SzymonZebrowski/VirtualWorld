@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 import java.util.Random;
 
-public class Czlowiek extends Zwierze implements KeyListener {
+public class Czlowiek extends Zwierze{
     public Czlowiek(int x, int y, Swiat s){
         super(x,y,s);
         sila=5;
@@ -20,21 +20,7 @@ public class Czlowiek extends Zwierze implements KeyListener {
 
     @Override
     public void akcja(){
-
-    }
-
-
-    @Override
-    public void keyTyped(KeyEvent k){}
-    @Override
-    public void keyReleased(KeyEvent k){}
-    @Override
-    public void keyPressed(KeyEvent k){
-        int key=k.getKeyCode();
-        if(key==KeyEvent.VK_UP) System.out.println("UP");
-        if(key==KeyEvent.VK_DOWN) System.out.println("DOWN");
-        if(key==KeyEvent.VK_LEFT) System.out.println("LEFT");
-        if(key==KeyEvent.VK_RIGHT) System.out.println("RIGHT");
+        swiat.turaCzlowieka();
     }
 
     @Override

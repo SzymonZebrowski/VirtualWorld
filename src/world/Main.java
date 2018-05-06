@@ -7,12 +7,10 @@ import java.awt.event.*;
 public class Main{
 
     public static void main(String[] args) {
-        Swiat swiat=new Swiat(8,8, TypSwiata.ZWYKLY);
-        swiat.dodajOrganizm(new Owca(0,0,swiat));
-        swiat.dodajOrganizm(new Owca(7,7,swiat));
-
+        Swiat swiat=new Swiat(30,30, TypSwiata.ZWYKLY);
+        //swiat.generator(1);
+        swiat.dodajOrganizm(new Czlowiek(5,5,swiat));
         Okno okno=new Okno(swiat);
         swiat.ustawOkno(okno);
-        swiat.symuluj();
     }
 }

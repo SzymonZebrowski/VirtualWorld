@@ -5,6 +5,7 @@ public abstract class Organizm {
 
     protected Swiat swiat;
     protected StanOrganizmu stan;
+    protected boolean niesmiertelnosc;
     protected int sila;
     protected int inicjatywa;
     protected int wiek;
@@ -30,6 +31,15 @@ public abstract class Organizm {
     abstract public boolean mozeIsc(int dx, int dy);
     abstract public boolean mozeRozmnozyc(int dx, int dy);
     public boolean umiejetnosc(Organizm atakujacy, Organizm obronca){return false;}
+    public boolean czyNiesmiertelny(){return niesmiertelnosc;}
+    public String zapiszDoPliku(){
+        String str;
+        int s=0;
+        if(stan==StanOrganizmu.BORN) s=0;
+        else if(stan==StanOrganizmu.ALIVE) s=1;
+        str=znak+" "+sila+" "+x+" "+y+" "+s;
+        return str;
+    }
 
     public Organizm(int x, int y, Swiat swiat){
         this.x=x;
@@ -39,6 +49,7 @@ public abstract class Organizm {
         this.swiat=swiat;
         this.wiek=0;
         this.stan=StanOrganizmu.BORN;
+        this.niesmiertelnosc=false;
     }
 
 }
