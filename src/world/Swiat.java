@@ -77,6 +77,10 @@ public class Swiat {
         }
         System.out.println(licznik);
     }
+    public String zwrocKierunekGracza(){return okno.kierunekGracza;}
+    public boolean zwrocUmiejetnosc(){return okno.umiejetnosc;}
+    public int zwrocTrwanie(){return okno.trwanie;}
+    public int zwrocPozostalo(){return okno.pozostalo;}
     public void czyscTablice(){
         for(int i=0; i<wysokosc; i++){
             for(int j=0; j<szerokosc; j++){
@@ -127,7 +131,6 @@ public class Swiat {
     }
     public void ustawOkno(Okno okno){this.okno=okno;}
     public void dodajKomunikat(String s){okno.addComunicate(s);}
-    public void turaCzlowieka(){okno.humanMove();}
     public boolean czyPuste(int x, int y){
         if(plansza[y][x]==null) return true;
         else return false;

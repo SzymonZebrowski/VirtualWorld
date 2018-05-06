@@ -93,6 +93,7 @@ public abstract class Zwierze extends Organizm {
                 swiat.zmniejszLicznik();
             }
         }
+        if(czyNiesmiertelny()) {ustawStan(StanOrganizmu.ALIVE);}
     }
     public void rozmnoz(Organizm atakujacy, Organizm obronca){
         int dx=0, dy=0;

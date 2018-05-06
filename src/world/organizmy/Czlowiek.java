@@ -14,17 +14,46 @@ public class Czlowiek extends Zwierze{
         inicjatywa=4;
         znak='@';
         wiek=0;
+        trwanie=0;
+        czekanie=0;
         stan=StanOrganizmu.BORN;
         nazwa="Człowiek";
     }
 
     @Override
     public void akcja(){
-        swiat.turaCzlowieka();
+        niesmiertelnosc=swiat.zwrocUmiejetnosc();
+        trwanie=swiat.zwrocTrwanie();
+        czekanie=swiat.zwrocPozostalo();
+        int dx=0, dy=0;
+        if(swiat.zwrocKierunekGracza()!=null) {
+            String dir = swiat.zwrocKierunekGracza();
+            switch (dir) {
+                case "UP":
+                    dy--;
+                    break;
+                case "DOWN":
+                    dy++;
+                    break;
+                case "LEFT":
+                    dx--;
+                    break;
+                case "RIGHT":
+                    dx++;
+                    break;
+            }
+            if (dx != 0 || dy != 0) {
+                if (mozeIsc(dx, dy))
+                    idz(x + dx, y + dy);
+            }
+        }
     }
 
     @Override
     public boolean umiejetnosc(Organizm atakujacy, Organizm obronca) {
+        if(niesmiertelnosc && atakujacy.zwrocSile()>sila){
+            return true;
+        }
      return false;
     }
 
@@ -34,5 +63,8 @@ public class Czlowiek extends Zwierze{
         swiat.doDodania(o);
 
     }
+
+    int trwanie;
+    int czekanie;
 
 }

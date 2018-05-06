@@ -7,7 +7,9 @@ import javax.swing.*;
 import world.organizmy.Czlowiek;
 
 class Okno implements ActionListener, MouseListener, KeyListener{
-   JFrame f, fZapisz, fWczytaj;
+  // JFrame f, fZapisz, fWczytaj;
+    TuraGraczaOkno f;
+    JFrame fZapisz, fWczytaj;
 
    Panel p;
    JButton bZapisz, bWczytaj, bNowaTura, bUmiejetnosc;
@@ -15,11 +17,14 @@ class Okno implements ActionListener, MouseListener, KeyListener{
    DefaultListModel dlm;
    JScrollPane jsp;
    Swiat swiat;
-   String nazwaPliku;
+   String nazwaPliku, kierunekGracza;
+
+   int pozostalo,trwanie;
+   boolean umiejetnosc;
 
    Okno(Swiat s){
         this.swiat=s;
-        f=new JFrame("Swiat!");
+        f=new TuraGraczaOkno();
         p=new Panel(swiat);
         bZapisz=new JButton("Zapisz");
         bWczytaj=new JButton("Wczytaj");
@@ -28,6 +33,9 @@ class Okno implements ActionListener, MouseListener, KeyListener{
         dlm=new DefaultListModel();
         jl=new JList(dlm);
         jsp=new JScrollPane(jl);
+        umiejetnosc=false;
+        pozostalo=0;
+        trwanie=0;
 
         f.add(bZapisz);
         f.add(bWczytaj);
@@ -49,6 +57,8 @@ class Okno implements ActionListener, MouseListener, KeyListener{
         bNowaTura.addActionListener(this);
         bUmiejetnosc.addActionListener(this);
         f.addMouseListener(this);
+        f.addKeyListener(this);
+
 
 
         f.setLayout(null);
@@ -99,8 +109,32 @@ class Okno implements ActionListener, MouseListener, KeyListener{
             jsp.setBounds(10,100+20*swiat.zwrocWysokosc(),250,100);
 
         }
-        else if(ae.getSource()==bNowaTura) {this.swiat.wykonajTure(); this.f.repaint();}
-        else if(ae.getSource()==bUmiejetnosc) System.out.println("Umiejętność!");
+        else if(ae.getSource()==bNowaTura) {
+
+            this.swiat.wykonajTure();
+            if(umiejetnosc==true){
+                if(trwanie>0)trwanie--;
+                addComunicate("Pozostało "+trwanie+" tur umiejętności");
+            }
+            if(trwanie==0){
+                umiejetnosc=false;
+                if(pozostalo>0){
+                    addComunicate("Pozostało "+pozostalo+" tur oczekiwania");
+                    pozostalo--;
+                }
+            }
+            this.f.repaint();
+        }
+        else if(ae.getSource()==bUmiejetnosc)  {
+            if(umiejetnosc==false && pozostalo==0) {
+            addComunicate("Aktywowano umiejętność");
+            umiejetnosc=true;
+            pozostalo=5;
+            trwanie=5;
+            }
+        }
+        f.requestFocus();
+       // kierunekGracza=null;
     }
 
     public void mouseEntered(MouseEvent e){}
@@ -134,17 +168,26 @@ class Okno implements ActionListener, MouseListener, KeyListener{
            }
        }
     }
-    public void keyTyped(KeyEvent k){}
-    public void keyReleased(KeyEvent k){
-    //   f.removeKeyListener(this);
-    }
-    public void keyPressed(KeyEvent k){
-        int key=k.getKeyCode();
+    @Override
+    public void keyTyped(KeyEvent k){ int key=k.getKeyCode();
         if(key==KeyEvent.VK_UP) System.out.println("UP");
         if(key==KeyEvent.VK_DOWN) System.out.println("DOWN");
         if(key==KeyEvent.VK_LEFT) System.out.println("LEFT");
         if(key==KeyEvent.VK_RIGHT) System.out.println("RIGHT");
+
     }
+    @Override
+    public void keyReleased(KeyEvent k){
+    }
+    @Override
+    public void keyPressed(KeyEvent k){
+        int key=k.getKeyCode();
+        if(key==KeyEvent.VK_UP) kierunekGracza="UP";
+        if(key==KeyEvent.VK_DOWN) kierunekGracza="DOWN";
+        if(key==KeyEvent.VK_LEFT) kierunekGracza="LEFT";
+        if(key==KeyEvent.VK_RIGHT) kierunekGracza="RIGHT";
+    }
+
     public void addComunicate(String s){
        dlm.addElement(s);
     }
@@ -152,7 +195,5 @@ class Okno implements ActionListener, MouseListener, KeyListener{
     public void deleteComunicate(){
        dlm.removeAllElements();
     }
-    public void humanMove(){
-     f.addKeyListener(this);
-    }
+
 }

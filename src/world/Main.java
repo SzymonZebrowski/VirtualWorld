@@ -8,8 +8,9 @@ public class Main{
 
     public static void main(String[] args) {
         Swiat swiat=new Swiat(30,30, TypSwiata.ZWYKLY);
-        //swiat.generator(1);
         swiat.dodajOrganizm(new Czlowiek(5,5,swiat));
+        swiat.generator(1);
+
         Okno okno=new Okno(swiat);
         swiat.ustawOkno(okno);
     }
