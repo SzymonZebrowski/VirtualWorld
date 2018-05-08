@@ -75,25 +75,30 @@ public abstract class Zwierze extends Organizm {
         swiat.dodajKomunikat(nazwa+" atakuje "+obronca.zwrocNazwe()+" na ("+(obronca.zwrocX())+","+(obronca.zwrocY())+")");
         System.out.println(nazwa+" atakuje "+obronca.zwrocNazwe()+" na ("+(obronca.zwrocX())+","+(obronca.zwrocY())+")");
 
-        if(obronca.umiejetnosc(atakujacy, obronca)==false) {
-            if (obronca.zwrocSile() <= atakujacy.zwrocSile()) {
-                swiat.dodajKomunikat("Atakujacy wygrywa!");
-                System.out.println("Atakujacy wygrywa!");
-                int dx = obronca.zwrocX();
-                int dy = obronca.zwrocY();
-                obronca.ustawStan(StanOrganizmu.DEAD);
-                swiat.zwolnijPole(dx, dy);
-                idz(dx, dy);
-                swiat.zmniejszLicznik();
-            } else {
-                swiat.dodajKomunikat("Atakujacy przegrywa!");
-                System.out.println("Atakujacy przegrywa!");
-                atakujacy.ustawStan(StanOrganizmu.DEAD);
-                swiat.zwolnijPole(atakujacy.zwrocX(), atakujacy.zwrocY());
-                swiat.zmniejszLicznik();
+        if(!(atakujacy.czyNiesmiertelny()&&obronca.zwrocSile()>atakujacy.zwrocSile()) &&
+                !(obronca.czyNiesmiertelny()&&atakujacy.zwrocSile()>=obronca.zwrocSile())) {
+            if (obronca.umiejetnosc(atakujacy, obronca) == false) {
+                if (obronca.zwrocSile() <= atakujacy.zwrocSile()) {
+                    swiat.dodajKomunikat("Atakujacy wygrywa!");
+                    System.out.println("Atakujacy wygrywa!");
+                    int dx = obronca.zwrocX();
+                    int dy = obronca.zwrocY();
+                    obronca.ustawStan(StanOrganizmu.DEAD);
+                    swiat.zwolnijPole(dx, dy);
+                    idz(dx, dy);
+                    swiat.zmniejszLicznik();
+                } else {
+                    swiat.dodajKomunikat("Atakujacy przegrywa!");
+                    System.out.println("Atakujacy przegrywa!");
+                    atakujacy.ustawStan(StanOrganizmu.DEAD);
+                    swiat.zwolnijPole(atakujacy.zwrocX(), atakujacy.zwrocY());
+                    swiat.zmniejszLicznik();
+                }
+            }
+            if (czyNiesmiertelny()) {
+                ustawStan(StanOrganizmu.ALIVE);
             }
         }
-        if(czyNiesmiertelny()) {ustawStan(StanOrganizmu.ALIVE);}
     }
     public void rozmnoz(Organizm atakujacy, Organizm obronca){
         int dx=0, dy=0;

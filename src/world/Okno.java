@@ -12,7 +12,7 @@ class Okno implements ActionListener, MouseListener, KeyListener{
     JFrame fZapisz, fWczytaj;
 
    Panel p;
-   JButton bZapisz, bWczytaj, bNowaTura, bUmiejetnosc;
+   JButton bZapisz, bWczytaj, bNowaTura, bUmiejetnosc, bLegenda;
    JList jl;
    DefaultListModel dlm;
    JScrollPane jsp;
@@ -30,6 +30,7 @@ class Okno implements ActionListener, MouseListener, KeyListener{
         bWczytaj=new JButton("Wczytaj");
         bNowaTura=new JButton("Nowa tura");
         bUmiejetnosc=new JButton("Umiejetnosc");
+        bLegenda=new JButton("Legenda");
         dlm=new DefaultListModel();
         jl=new JList(dlm);
         jsp=new JScrollPane(jl);
@@ -41,6 +42,7 @@ class Okno implements ActionListener, MouseListener, KeyListener{
         f.add(bWczytaj);
         f.add(bNowaTura);
         f.add(bUmiejetnosc);
+        f.add(bLegenda);
         f.add(jsp);
         f.add(p);
         f.pack();
@@ -50,12 +52,14 @@ class Okno implements ActionListener, MouseListener, KeyListener{
         bWczytaj.setBounds(160,10,120,30);
         bNowaTura.setBounds(310,10,120,30);
         bUmiejetnosc.setBounds(460,10,120,30);
-        jsp.setBounds(10,100+20*swiat.zwrocWysokosc(),250,100);
+        bLegenda.setBounds(610,10,120,30);
+        jsp.setBounds(10,100+20*swiat.zwrocWysokosc(),400,100);
 
         bZapisz.addActionListener(this);
         bWczytaj.addActionListener(this);
         bNowaTura.addActionListener(this);
         bUmiejetnosc.addActionListener(this);
+        bLegenda.addActionListener(this);
         f.addMouseListener(this);
         f.addKeyListener(this);
 
@@ -63,10 +67,10 @@ class Okno implements ActionListener, MouseListener, KeyListener{
 
         f.setLayout(null);
         f.setVisible(true);
-        if(20*swiat.zwrocSzerokosc()>590){
+        if(20*swiat.zwrocSzerokosc()>740){
             f.setSize(20*swiat.zwrocSzerokosc() + 40, 20*swiat.zwrocWysokosc()+250);
         }
-        else f.setSize(610, 20*swiat.zwrocWysokosc()+250);
+        else f.setSize(760, 20*swiat.zwrocWysokosc()+250);
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jl.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -101,10 +105,10 @@ class Okno implements ActionListener, MouseListener, KeyListener{
             }
             System.out.println("Nowa szerokosc i wysokosc: "+swiat.zwrocSzerokosc()+" "+swiat.zwrocWysokosc());
 
-            if(20*swiat.zwrocSzerokosc()>590){
+            if(20*swiat.zwrocSzerokosc()>740){
                 f.setSize(20*swiat.zwrocSzerokosc() + 40, 20*swiat.zwrocWysokosc()+250);
             }
-            else f.setSize(610, 20*swiat.zwrocWysokosc()+250);
+            else f.setSize(760, 20*swiat.zwrocWysokosc()+250);
             p.setBounds(0,0,20*swiat.zwrocSzerokosc()+40,20*swiat.zwrocWysokosc()+60);
             jsp.setBounds(10,100+20*swiat.zwrocWysokosc(),250,100);
 
@@ -132,6 +136,29 @@ class Okno implements ActionListener, MouseListener, KeyListener{
             pozostalo=5;
             trwanie=5;
             }
+        }
+        else if(ae.getSource()==bLegenda){
+            JFrame fLegenda=new JFrame("Legenda");
+            LegendPanel lpLegenda=new LegendPanel();
+
+            String organizmy[]={"Owca","Wilk", "Lis", "Żółw", "Antylopa", "Człowiek",
+                    "Trawa", "Guarana", "Wilcza Jagoda", "Barszcz", "Mlecz"};
+           // JLabel label[]=new JLabel[11];
+
+            for(int i=0; i<11; i++){
+                JLabel label=new JLabel();
+                label.setText(organizmy[i]);
+                label.setBounds(50,10+20*i,150,20);
+                fLegenda.add(label);
+            }
+            fLegenda.add(lpLegenda);
+
+            fLegenda.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            fLegenda.setSize(200,300);
+           // fLegenda.pack();
+            fLegenda.setVisible(true);
+
+          //  JOptionPane.showMessageDialog(fLegenda,"asd");
         }
         f.requestFocus();
        // kierunekGracza=null;
