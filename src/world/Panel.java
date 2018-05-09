@@ -2,6 +2,7 @@ package world;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.Math;
 
 public class Panel extends JPanel {
     Swiat swiat;
@@ -20,6 +21,7 @@ public class Panel extends JPanel {
         for (int i = 0; i < swiat.zwrocWysokosc(); i++) {
             for (int j = 0; j < swiat.zwrocSzerokosc(); j++) {
                 if (swiat.typSwiata == TypSwiata.HEX) {
+
                     if ((i + j) % 2 == 0) {
                         // g2d.setPaint(new Color(0,70,160));
                         // g2d.fillRect(10 + j * 20, 50 + i * 20, 20, 20);
@@ -30,6 +32,8 @@ public class Panel extends JPanel {
                         if (j % 2 == 1) g2d.drawRect(10 + j * 20, 50 + i * 20, 20, 20);
                         else g2d.drawRect(20 + j * 20, 50 + i * 20, 20, 20);
                     }
+
+
                 } else { //swiat zwykly
                     if(swiat.zwrocOrganizm(j,i)!=null) {
                         char pom = swiat.zwrocOrganizm(j, i).zwrocZnak();

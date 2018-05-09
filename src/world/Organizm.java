@@ -23,6 +23,9 @@ public abstract class Organizm {
     public StanOrganizmu zwrocStan(){return stan;}
     public void ustawSile(int s){sila=s;}
     public void ustawStan(StanOrganizmu s){stan=s;}
+    public void ustawNiesmiertelnosc(boolean s){}
+    public void ustawTrwanie(int s){}
+    public void ustawCzekanie(int s){}
     public void dorosnij(){wiek++; stan=StanOrganizmu.ALIVE;}
     public void akcja(){}
     abstract public void kolizja(Organizm atakujacy, Organizm obronca);

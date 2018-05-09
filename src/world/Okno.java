@@ -223,4 +223,7 @@ class Okno implements ActionListener, MouseListener, KeyListener{
        dlm.removeAllElements();
     }
 
+    public void ustawNiesmiertelnosc(boolean s){umiejetnosc=s;}
+    public void ustawTrwanie(int s){trwanie=s;}
+    public void ustawCzekanie(int s){pozostalo=s;}
 }

@@ -64,6 +64,16 @@ public class Czlowiek extends Zwierze{
 
     }
 
+    public String zapiszDoPliku(){
+    String str;
+    int s=0;
+    if(stan==StanOrganizmu.BORN) s=0;
+    else if(stan==StanOrganizmu.ALIVE) s=1;
+    str=znak+" "+sila+" "+x+" "+y+" "+s+" "+niesmiertelnosc+" "+trwanie+" "+czekanie;
+
+    return str;
+    }
+
     int trwanie;
     int czekanie;
 

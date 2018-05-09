@@ -131,6 +131,7 @@ public abstract class Zwierze extends Organizm {
         }
     }
     abstract public void dodaj(int x, int y);
+
     public Zwierze(int x, int y, Swiat swiat){
         super(x,y,swiat);
     }

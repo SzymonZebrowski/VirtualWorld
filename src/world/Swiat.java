@@ -81,6 +81,9 @@ public class Swiat {
     public boolean zwrocUmiejetnosc(){return okno.umiejetnosc;}
     public int zwrocTrwanie(){return okno.trwanie;}
     public int zwrocPozostalo(){return okno.pozostalo;}
+    public void ustawNiesmiertelnosc(boolean s){okno.ustawNiesmiertelnosc(s);}
+    public void ustawTrwanie(int s){okno.ustawTrwanie(s);}
+    public void ustawCzekanie(int s){okno.ustawCzekanie(s);}
     public void czyscTablice(){
         for(int i=0; i<wysokosc; i++){
             for(int j=0; j<szerokosc; j++){
@@ -185,7 +188,8 @@ public class Swiat {
 
             for(Organizm o: czlowiekOwcaAntylopaLista){
                 if(o.zwrocZnak()=='@' && o.zwrocStan()!=StanOrganizmu.DEAD){
-
+                    System.out.println("Rzutowanie człowieka!");
+                    plikWy.println(o.zapiszDoPliku());
                 }
             }
             List<Organizm>lista=null;
@@ -198,7 +202,7 @@ public class Swiat {
                     case 4: lista=roslinaLista; break;
                 }
                 for(Organizm o : lista){
-                    if(o.zwrocStan()!=StanOrganizmu.DEAD){
+                    if(o.zwrocStan()!=StanOrganizmu.DEAD && o.zwrocZnak()!='@'){
                         plikWy.println(o.zapiszDoPliku());
                     }
                 }
@@ -231,6 +235,8 @@ public class Swiat {
 
            char znak;
            int x,y,s, sila;
+           boolean n;
+           int t,c;
            StanOrganizmu stan=StanOrganizmu.BORN;
            while(sc.hasNext()){
                znak=sc.next().charAt(0);
@@ -239,13 +245,27 @@ public class Swiat {
                y=sc.nextInt();
                s=sc.nextInt();
                if(znak=='@'){
-                   //obsluga wczytywania czlowieka
+                  n=sc.nextBoolean();
+                  t=sc.nextInt();
+                  c=sc.nextInt();
+                   if (s == 0) stan = StanOrganizmu.BORN;
+                   else if (s == 1) stan = StanOrganizmu.ALIVE;
+                   System.out.println("wololo");
+                   Organizm o = dodajZeZnaku(znak, x, y);
+                   System.out.println("wololo");
+                   o.ustawStan(stan);
+                   o.ustawSile(sila);
+                   ustawNiesmiertelnosc(n);
+                   ustawTrwanie(t);
+                   ustawCzekanie(c);
                }
-               if(s==0) stan=StanOrganizmu.BORN;
-               else if(s==1) stan=StanOrganizmu.ALIVE;
-               Organizm o=dodajZeZnaku(znak, x,y);
-               o.ustawStan(stan);
-               o.ustawSile(sila);
+               else {
+                   if (s == 0) stan = StanOrganizmu.BORN;
+                   else if (s == 1) stan = StanOrganizmu.ALIVE;
+                   Organizm o = dodajZeZnaku(znak, x, y);
+                   o.ustawStan(stan);
+                   o.ustawSile(sila);
+               }
            }
            sc.close();
         }
@@ -259,6 +279,9 @@ public class Swiat {
     public Organizm dodajZeZnaku(char z,int x, int y){
         Organizm o=null;
         switch(z){
+                case '@':
+                     o=new Czlowiek(x,y,this);
+                     break;
                 case 'l':
                     o=new Lis(x,y,this);
                     break;
