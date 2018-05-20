@@ -184,6 +184,8 @@ public class Swiat {
         PrintWriter plikWy=null;
         try {
             plikWy=new PrintWriter(plik);
+            if(typSwiata==TypSwiata.ZWYKLY) plikWy.println("ZWYKLY");
+            else if(typSwiata==TypSwiata.HEX) plikWy.println("HEX");
             plikWy.println(szerokosc + " " + wysokosc);
 
             for(Organizm o: czlowiekOwcaAntylopaLista){
@@ -220,51 +222,53 @@ public class Swiat {
         BufferedReader plikWe=null;
         try {
            plikWe=new BufferedReader(new FileReader(plik));
-           String linia=plikWe.readLine();
            Scanner sc= new Scanner(new File(plik));
+           String typ=sc.next();
+           System.out.println(typ);
 
-           czyscTablice();
-           usunOrganizmy();
-           int wys, szer;
-           szer=sc.nextInt();
-           wys=sc.nextInt();
-           this.wysokosc=wys;
-           this.szerokosc=szer;
+           if((typ.equals("ZWYKLY") && zwrocTypSwiata()==TypSwiata.ZWYKLY)||
+              (typ.equals("HEX") && zwrocTypSwiata()==TypSwiata.HEX)) {
 
-           this.plansza=new Organizm[wys][szer];
+               czyscTablice();
+               usunOrganizmy();
+               int wys, szer;
+               szer = sc.nextInt();
+               wys = sc.nextInt();
+               this.wysokosc = wys;
+               this.szerokosc = szer;
 
-           char znak;
-           int x,y,s, sila;
-           boolean n;
-           int t,c;
-           StanOrganizmu stan=StanOrganizmu.BORN;
-           while(sc.hasNext()){
-               znak=sc.next().charAt(0);
-               sila=sc.nextInt();
-               x=sc.nextInt();
-               y=sc.nextInt();
-               s=sc.nextInt();
-               if(znak=='@'){
-                  n=sc.nextBoolean();
-                  t=sc.nextInt();
-                  c=sc.nextInt();
-                   if (s == 0) stan = StanOrganizmu.BORN;
-                   else if (s == 1) stan = StanOrganizmu.ALIVE;
-                   System.out.println("wololo");
-                   Organizm o = dodajZeZnaku(znak, x, y);
-                   System.out.println("wololo");
-                   o.ustawStan(stan);
-                   o.ustawSile(sila);
-                   ustawNiesmiertelnosc(n);
-                   ustawTrwanie(t);
-                   ustawCzekanie(c);
-               }
-               else {
-                   if (s == 0) stan = StanOrganizmu.BORN;
-                   else if (s == 1) stan = StanOrganizmu.ALIVE;
-                   Organizm o = dodajZeZnaku(znak, x, y);
-                   o.ustawStan(stan);
-                   o.ustawSile(sila);
+               this.plansza = new Organizm[wys][szer];
+
+               char znak;
+               int x, y, s, sila;
+               boolean n;
+               int t, c;
+               StanOrganizmu stan = StanOrganizmu.BORN;
+               while (sc.hasNext()) {
+                   znak = sc.next().charAt(0);
+                   sila = sc.nextInt();
+                   x = sc.nextInt();
+                   y = sc.nextInt();
+                   s = sc.nextInt();
+                   if (znak == '@') {
+                       n = sc.nextBoolean();
+                       t = sc.nextInt();
+                       c = sc.nextInt();
+                       if (s == 0) stan = StanOrganizmu.BORN;
+                       else if (s == 1) stan = StanOrganizmu.ALIVE;
+                       Organizm o = dodajZeZnaku(znak, x, y);
+                       o.ustawStan(stan);
+                       o.ustawSile(sila);
+                       ustawNiesmiertelnosc(n);
+                       ustawTrwanie(t);
+                       ustawCzekanie(c);
+                   } else {
+                       if (s == 0) stan = StanOrganizmu.BORN;
+                       else if (s == 1) stan = StanOrganizmu.ALIVE;
+                       Organizm o = dodajZeZnaku(znak, x, y);
+                       o.ustawStan(stan);
+                       o.ustawSile(sila);
+                   }
                }
            }
            sc.close();

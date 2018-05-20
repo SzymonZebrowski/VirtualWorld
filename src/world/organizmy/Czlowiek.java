@@ -26,25 +26,75 @@ public class Czlowiek extends Zwierze{
         trwanie=swiat.zwrocTrwanie();
         czekanie=swiat.zwrocPozostalo();
         int dx=0, dy=0;
-        if(swiat.zwrocKierunekGracza()!=null) {
-            String dir = swiat.zwrocKierunekGracza();
-            switch (dir) {
-                case "UP":
-                    dy--;
-                    break;
-                case "DOWN":
-                    dy++;
-                    break;
-                case "LEFT":
-                    dx--;
-                    break;
-                case "RIGHT":
-                    dx++;
-                    break;
+        if(swiat.zwrocTypSwiata()==TypSwiata.ZWYKLY) {
+            if (swiat.zwrocKierunekGracza() != null) {
+                String dir = swiat.zwrocKierunekGracza();
+                switch (dir) {
+                    case "UP":
+                        dy--;
+                        break;
+                    case "DOWN":
+                        dy++;
+                        break;
+                    case "LEFT":
+                        dx--;
+                        break;
+                    case "RIGHT":
+                        dx++;
+                        break;
+                }
+                if (dx != 0 || dy != 0) {
+                    if (mozeIsc(dx, dy))
+                        idz(x + dx, y + dy);
+                }
             }
-            if (dx != 0 || dy != 0) {
-                if (mozeIsc(dx, dy))
-                    idz(x + dx, y + dy);
+        }else {
+            if (swiat.zwrocKierunekGracza() != null) {
+                String dir = swiat.zwrocKierunekGracza();
+                switch (dir) {
+                    case "L":
+                        dx = -1;
+                        break;
+                    case "LD":
+                        if (y % 2 == 0) {
+                            dy = 1;
+                            dx = -1;
+                        } else {
+                            dy = 1;
+                        }
+                        break;
+                    case "LU":
+                        if (y % 2 == 0) {
+                            dy = -1;
+                            dx = -1;
+                        } else {
+                            dy = -1;
+                        }
+                        break;
+                    case "R":
+                        dx = 1;
+                        break;
+                    case "RD":
+                        if (y % 2 == 0) {
+                            dy = 1;
+                        } else {
+                            dy = 1;
+                            dx = 1;
+                        }
+                        break;
+                    case "RU":
+                        if (y % 2 == 0) {
+                            dy = -1;
+                        } else {
+                            dy = -1;
+                            dx = 1;
+                        }
+                        break;
+                }
+                if (dx != 0 || dy != 0) {
+                    if (mozeIsc(dx, dy))
+                        idz(x + dx, y + dy);
+                }
             }
         }
     }
