@@ -48,7 +48,71 @@ public class Barszcz extends Roslina {
             super.akcja();
         }
         else{
-            //hex
+            if(y%2==0){
+                //LU
+                if (mozeIsc(-1, -1) && !swiat.czyPuste(x-1,y-1)){
+                    char pom=swiat.zwrocOrganizm(x-1,y-1).zwrocZnak();
+                    if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x-1,y-1).czyNiesmiertelny())
+                        swiat.zwrocOrganizm(x-1,y-1).ustawStan(StanOrganizmu.DEAD);
+                }
+                //LD
+                if (mozeIsc(-1, 1) && !swiat.czyPuste(x-1,y+1)){
+                    char pom=swiat.zwrocOrganizm(x-1,y+1).zwrocZnak();
+                    if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x-1,y+1).czyNiesmiertelny())
+                        swiat.zwrocOrganizm(x-1,y+1).ustawStan(StanOrganizmu.DEAD);
+                }
+                //RD
+                if (mozeIsc(0, 1) && !swiat.czyPuste(x,y+1)){
+                    char pom=swiat.zwrocOrganizm(x,y+1).zwrocZnak();
+                    if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x,y+1).czyNiesmiertelny())
+                        swiat.zwrocOrganizm(x,y+1).ustawStan(StanOrganizmu.DEAD);
+                }
+                //RU
+                if (mozeIsc(0, -1) && !swiat.czyPuste(x,y-1)){
+                    char pom=swiat.zwrocOrganizm(x,y-1).zwrocZnak();
+                    if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x,y-1).czyNiesmiertelny())
+                        swiat.zwrocOrganizm(x,y-1).ustawStan(StanOrganizmu.DEAD);
+                }
+            }
+            else{
+                //LU
+                if (mozeIsc(0, -1) && !swiat.czyPuste(x,y-1)){
+                    char pom=swiat.zwrocOrganizm(x,y-1).zwrocZnak();
+                    if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x,y-1).czyNiesmiertelny())
+                        swiat.zwrocOrganizm(x,y-1).ustawStan(StanOrganizmu.DEAD);
+                }
+                //LD
+                if (mozeIsc(0, 1) && !swiat.czyPuste(x,y+1)){
+                    char pom=swiat.zwrocOrganizm(x,y+1).zwrocZnak();
+                    if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x,y+1).czyNiesmiertelny())
+                        swiat.zwrocOrganizm(x,y+1).ustawStan(StanOrganizmu.DEAD);
+                }
+                //RD
+                if (mozeIsc(1, 1) && !swiat.czyPuste(x+1,y+1)){
+                    char pom=swiat.zwrocOrganizm(x+1,y+1).zwrocZnak();
+                    if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x+1,y+1).czyNiesmiertelny())
+                        swiat.zwrocOrganizm(x+1,y+1).ustawStan(StanOrganizmu.DEAD);
+                }
+                //RU
+                if (mozeIsc(1, -1) && !swiat.czyPuste(x+1,y-1)){
+                    char pom=swiat.zwrocOrganizm(x+1,y-1).zwrocZnak();
+                    if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x+1,y-1).czyNiesmiertelny())
+                        swiat.zwrocOrganizm(x+1,y-1).ustawStan(StanOrganizmu.DEAD);
+                }
+            }
+            //L
+            if (mozeIsc(-1, 0) && !swiat.czyPuste(x-1,y)){
+                char pom=swiat.zwrocOrganizm(x-1,y).zwrocZnak();
+                if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x-1,y).czyNiesmiertelny())
+                    swiat.zwrocOrganizm(x-1,y).ustawStan(StanOrganizmu.DEAD);
+            }
+            //R
+            if (mozeIsc(1, 0) && !swiat.czyPuste(x+1,y)){
+                char pom=swiat.zwrocOrganizm(x+1,y).zwrocZnak();
+                if(pom!='B' && pom!='G' && pom!='W' && pom!='T' && pom!='M' && !swiat.zwrocOrganizm(x+1,y).czyNiesmiertelny())
+                    swiat.zwrocOrganizm(x+1,y).ustawStan(StanOrganizmu.DEAD);
+            }
+            super.akcja();
         }
     }
 
