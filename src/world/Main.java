@@ -8,7 +8,7 @@ public class Main{
 
     public static void main(String[] args) {
 
-        Swiat swiat=new Swiat(40,20, TypSwiata.HEX);
+        Swiat swiat=new SwiatZwykly(20,20);
         swiat.dodajOrganizm(new Czlowiek(5,5,swiat));
         swiat.generator(2);
 

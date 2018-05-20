@@ -10,44 +10,9 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Swiat {
+public abstract class Swiat {
 
     public void wykonajTure(){
-        /*for(Organizm o : lisLista){
-            if(o.zwrocStan()==StanOrganizmu.ALIVE){
-                o.dorosnij();
-                o.akcja();
-            }
-            else if(o.zwrocStan()==StanOrganizmu.BORN) o.dorosnij();
-        }
-        for(Organizm o : wilkLista){
-            if(o.zwrocStan()==StanOrganizmu.ALIVE){
-                o.dorosnij();
-                o.akcja();
-            }
-            else if(o.zwrocStan()==StanOrganizmu.BORN) o.dorosnij();
-        }
-        for(Organizm o : czlowiekOwcaAntylopaLista){
-            if(o.zwrocStan()==StanOrganizmu.ALIVE){
-                o.dorosnij();
-                o.akcja();
-            }
-            else if(o.zwrocStan()==StanOrganizmu.BORN) o.dorosnij();
-        }
-        for(Organizm o : zolwLista){
-            if(o.zwrocStan()==StanOrganizmu.ALIVE){
-                o.dorosnij();
-                o.akcja();
-            }
-            else if(o.zwrocStan()==StanOrganizmu.BORN) o.dorosnij();
-        }
-        for(Organizm o : roslinaLista){
-            if(o.zwrocStan()==StanOrganizmu.ALIVE){
-                o.dorosnij();
-                o.akcja();
-            }
-            else if(o.zwrocStan()==StanOrganizmu.BORN) o.dorosnij();
-        }*/
         numerTury++;
             for(Organizm o : doDodaniaLista){
                dodajOrganizm(o);
